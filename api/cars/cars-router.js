@@ -17,8 +17,8 @@ router.get('/:id', (req, res) => {
   const { id } = req.params;
 
   db('cars').where({ id }).first()
-    .then(fruit => {
-      res.json(fruit);
+    .then(car => {
+      res.json(car);
     })
     .catch(err => {
       res.status(500).json({ message: 'Failed to retrieve car' });
@@ -26,16 +26,15 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const fruitData = req.body;
-  db('cars').insert(fruitData)
+  const carData = req.body;
+  db('cars').insert(carData)
     .then(ids => {
       db('cars').where({ id: ids[0] })
-        .then(newFruitEntry => {
-          res.status(201).json(newFruitEntry);
+        .then(newCarEntry => {
+          res.status(201).json(newCarEntry);
         });
     })
     .catch(err => {
-      console.log('POST error', err);
       res.status(500).json({ message: err.message });
     });
 });
