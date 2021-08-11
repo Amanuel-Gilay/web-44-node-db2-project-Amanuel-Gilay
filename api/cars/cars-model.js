@@ -1,11 +1,13 @@
 const getAll = () => {
-  // DO YOUR MAGIC
+  
 }
 
 const getById = () => {
-  // DO YOUR MAGIC
+  return db('posts').where('id', id).first()
 }
 
-const create = () => {
-  // DO YOUR MAGIC
+const create = ({ title, contents}) => {
+  const [id] = await db('cars').insert({ title, contents }) 
+  const newCar = await getById(id)
+  return newCar 
 }
